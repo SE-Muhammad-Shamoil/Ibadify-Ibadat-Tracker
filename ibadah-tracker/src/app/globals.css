@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0f172a;
-  --surface: #1e293b;
-  --surface-2: #334155;
-  --border: #334155;
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --accent: #6366f1;
-  --accent-light: #818cf8;
-  --accent-glow: rgba(99, 102, 241, 0.3);
+  --background: #09090b; /* Deep rich dark background */
+  --surface: #18181b;
+  --surface-2: #27272a;
+  --border: #3f3f46;
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent: #8b5cf6; /* Switch to a richer purple/violet */
+  --accent-light: #a78bfa;
+  --accent-glow: rgba(139, 92, 246, 0.4);
   --gold: #f59e0b;
   --gold-light: #fbbf24;
   --green: #10b981;
@@ -50,10 +50,19 @@ body {
 
 /* Glass morphism utility */
 .glass {
-  background: rgba(30, 41, 59, 0.8);
+  background: rgba(24, 24, 27, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-panel {
+  background: linear-gradient(145deg, rgba(39, 39, 42, 0.6), rgba(24, 24, 27, 0.8));
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 /* Gradient text */
@@ -76,7 +85,7 @@ body {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -126,17 +135,19 @@ body {
 /* Prayer status colors */
 .prayer-done {
   background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 .prayer-jamaa {
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
 }
 .prayer-missed {
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
 }
 .prayer-empty {
-  background: rgba(51, 65, 85, 0.5);
-  border: 1px dashed rgba(148, 163, 184, 0.2);
+  background: rgba(39, 39, 42, 0.5);
+  border: 1px dashed rgba(161, 161, 170, 0.2);
 }
 
 /* Card hover */
