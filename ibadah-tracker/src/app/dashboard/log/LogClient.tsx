@@ -94,25 +94,25 @@ export default function LogClient({ existingLog, userId, today }: Props) {
   const PrayerBtn = ({ prayer }: { prayer: PrayerName }) => {
     const val = form[prayer]
     const states = [
-      { label: 'Tap to log', bg: 'var(--surface)', border: 'var(--border)', text: 'var(--text-muted)', icon: '◯' },
-      { label: 'Prayed', bg: 'linear-gradient(135deg, rgba(16,185,129,0.2), rgba(5,150,105,0.1))', border: 'rgba(16,185,129,0.3)', text: 'var(--green-light)', icon: '✓' },
-      { label: 'Jamāʿah', bg: 'linear-gradient(135deg, rgba(139,92,246,0.3), rgba(109,40,217,0.2))', border: 'rgba(139,92,246,0.4)', text: 'var(--accent-light)', icon: '✦' },
+      { label: 'Tap to log', bg: 'var(--surface-2)', border: 'var(--border)', text: 'var(--text-muted)', icon: '◯' },
+      { label: 'Prayed', bg: 'var(--green-light)', border: 'var(--green)', text: '#ffffff', icon: '✓' },
+      { label: 'Jamāʿah', bg: 'var(--accent)', border: 'var(--accent-light)', text: '#ffffff', icon: '✦' },
     ]
     const s = states[val]
     return (
       <button
         type="button"
         onClick={() => cyclePrayer(prayer)}
-        className="flex flex-col items-center gap-2 p-4 rounded-xl transition-all hover:-translate-y-1 active:scale-95 shadow-sm"
-        style={{ background: s.bg, border: `1px solid ${s.border}` }}
+        className="flex flex-col items-center gap-1.5 p-5 rounded-3xl transition-all active:scale-95 shadow-sm"
+        style={{ background: val === 0 ? s.bg : `linear-gradient(135deg, ${s.bg}, ${s.border})`, border: val === 0 ? `1px solid ${s.border}` : `1px solid transparent` }}
       >
-        <span className="text-2xl" style={{ color: s.text }}>{s.icon}</span>
-        <span className="text-sm font-semibold" style={{ color: s.text }}>{PRAYER_LABELS[prayer]}</span>
-        <span className="text-xs" style={{ color: s.text === 'var(--text-muted)' ? 'var(--text-secondary)' : s.text, opacity: 0.8 }}>
+        <span className="text-3xl" style={{ color: s.text }}>{s.icon}</span>
+        <span className="text-[15px] font-bold" style={{ color: s.text }}>{PRAYER_LABELS[prayer]}</span>
+        <span className="text-[12px] font-medium" style={{ color: val === 0 ? 'var(--text-secondary)' : 'rgba(255,255,255,0.8)' }}>
           {PRAYER_TIMES[prayer]}
         </span>
-        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md mt-1" style={{
-          background: val === 0 ? 'var(--surface-2)' : val === 1 ? 'rgba(16,185,129,0.15)' : 'rgba(139,92,246,0.15)',
+        <span className="text-[10px] font-extrabold uppercase tracking-wide px-2.5 py-1 rounded-full mt-2" style={{
+          background: val === 0 ? 'var(--surface)' : 'rgba(0,0,0,0.15)',
           color: s.text
         }}>
           {s.label}
@@ -122,21 +122,21 @@ export default function LogClient({ existingLog, userId, today }: Props) {
   }
 
   const CountInput = ({ label, field, icon }: { label: string; field: keyof typeof form; icon: string }) => (
-    <div className="flex items-center justify-between p-4 rounded-xl bg-[var(--surface-2)] border border-[var(--border)] transition-all hover:border-[var(--accent-glow)]">
-      <div className="flex items-center gap-3">
-        <span className="text-xl">{icon}</span>
-        <span className="text-sm font-medium text-[var(--text-primary)]">{label}</span>
+    <div className="flex items-center justify-between p-4 rounded-3xl bg-[var(--surface-2)] border border-[var(--border)] transition-all">
+      <div className="flex items-center gap-4 pl-2">
+        <span className="text-2xl">{icon}</span>
+        <span className="text-[15px] font-bold text-[var(--text-primary)]">{label}</span>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 bg-[var(--surface)] p-1 rounded-2xl border border-[var(--border)]">
         <button type="button" onClick={() => setForm(f => ({ ...f, [field]: Math.max(0, (f[field] as number) - 1) }))}
-          className="w-8 h-8 rounded-lg font-bold transition-all hover:bg-[var(--surface)] flex items-center justify-center text-[var(--text-secondary)] hover:text-white border border-[var(--border)] active:scale-95">−</button>
+          className="w-12 h-12 rounded-xl font-bold text-xl transition-all active:scale-90 flex items-center justify-center text-[var(--text-secondary)] bg-[var(--surface-2)] shadow-sm">−</button>
         <input
           type="number" min={0} value={form[field] as number}
           onChange={e => setForm(f => ({ ...f, [field]: parseInt(e.target.value) || 0 }))}
-          className="w-14 text-center text-lg font-bold bg-transparent border-none outline-none text-[var(--text-primary)]"
+          className="w-12 text-center text-lg font-bold bg-transparent border-none outline-none text-[var(--text-primary)]"
         />
         <button type="button" onClick={() => setForm(f => ({ ...f, [field]: (f[field] as number) + 1 }))}
-          className="w-8 h-8 rounded-lg font-bold transition-all hover:bg-[var(--surface)] flex items-center justify-center text-[var(--text-secondary)] hover:text-white border border-[var(--border)] active:scale-95">+</button>
+          className="w-12 h-12 rounded-xl font-bold text-xl transition-all active:scale-90 flex items-center justify-center text-[var(--text-primary)] bg-[var(--surface-2)] shadow-sm">+</button>
       </div>
     </div>
   )
@@ -145,70 +145,62 @@ export default function LogClient({ existingLog, userId, today }: Props) {
     <button
       type="button"
       onClick={() => setForm(f => ({ ...f, [field]: !f[field] }))}
-      className="flex items-center gap-3 p-4 rounded-xl transition-all w-full text-left outline-none"
-      style={{
-        background: form[field] ? 'rgba(139,92,246,0.1)' : 'var(--surface-2)',
-        border: `1px solid ${form[field] ? 'var(--accent)' : 'var(--border)'}`,
-      }}
+      className={`flex items-center gap-4 p-5 rounded-3xl transition-all w-full text-left outline-none bg-[var(--surface-2)] border border-[var(--border)] active:scale-[0.98] ${form[field] ? 'border-[var(--accent)] bg-opacity-80' : ''}`}
     >
-      <span className="text-xl">{icon}</span>
-      <span className="flex-1 text-sm font-semibold" style={{ color: form[field] ? 'var(--text-primary)' : 'var(--text-secondary)' }}>
+      <span className="text-2xl">{icon}</span>
+      <span className="flex-1 text-[15px] font-bold" style={{ color: form[field] ? 'var(--text-primary)' : 'var(--text-secondary)' }}>
         {label}
       </span>
-      <div className="w-11 h-6 rounded-full relative transition-all shadow-inner" style={{
-        background: form[field] ? 'linear-gradient(135deg, var(--accent), var(--accent-light))' : 'var(--surface)'
+      <div className="w-[52px] h-[32px] rounded-full relative transition-all shadow-inner border border-[var(--border)]" style={{
+        background: form[field] ? 'var(--green)' : 'var(--surface)'
       }}>
-        <div className="w-5 h-5 rounded-full absolute top-[2px] transition-all shadow-md" style={{
-          background: 'white',
-          left: form[field] ? '22px' : '2px',
+        <div className="w-[28px] h-[28px] rounded-full absolute top-[1px] transition-all shadow-md bg-white" style={{
+          left: form[field] ? '21px' : '1px',
         }} />
       </div>
     </button>
   )
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8 animate-fadeIn pb-12 pt-4">
+    <div className="max-w-2xl mx-auto space-y-6 animate-fadeIn pb-[120px] pt-4 px-4 md:px-0">
       {/* Header */}
-      <div className="mb-2">
-        <h1 className="text-3xl font-bold text-[var(--text-primary)] tracking-tight">Daily Log</h1>
-        <p className="text-[var(--text-muted)] mt-2 font-medium">
-          {format(new Date(), 'EEEE, MMMM d yyyy')} · Tap each prayer to cycle status
+      <div className="mb-4">
+        <h1 className="text-3xl font-extrabold text-[var(--text-primary)] tracking-tight">Daily Log</h1>
+        <p className="text-[var(--text-muted)] mt-1 font-medium">
+          {format(new Date(), 'EEEE, MMMM d yyyy')}
         </p>
       </div>
 
       {/* === FIVE PRAYERS === */}
-      <section id="prayers" className="glass-panel rounded-2xl p-6 md:p-8">
-        <h2 className="text-lg font-semibold mb-6 flex items-center gap-2 text-[var(--text-primary)]">
-          <span>🕌</span> Five Daily Prayers
-          <span className="ml-auto text-xs font-bold px-3 py-1 rounded-full bg-[var(--accent-glow)] text-[var(--accent-light)] border border-[var(--accent)]">
-            {PRAYER_NAMES.filter(p => form[p] > 0).length}/5
+      <section id="prayers" className="glass-panel rounded-3xl p-6">
+        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-[var(--text-primary)] tracking-tight">
+          <span>🕌</span> Fardh Prayers
+          <span className="ml-auto text-[11px] font-bold px-3 py-1 rounded-full bg-[var(--surface-2)] text-[var(--text-primary)] border border-[var(--border)]">
+            {PRAYER_NAMES.filter(p => form[p] > 0).length}/5 Done
           </span>
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
           {PRAYER_NAMES.map(p => <PrayerBtn key={p} prayer={p} />)}
         </div>
-        <p className="text-[11px] uppercase tracking-wider mt-6 text-center text-[var(--text-muted)] font-bold">
-          ◯ Not done <span className="mx-2">•</span> ✓ Prayed <span className="mx-2">•</span> ✦ With Jamāʿah
-        </p>
       </section>
 
       {/* === OPTIONAL PRAYERS === */}
-      <section className="glass-panel rounded-2xl p-6 md:p-8">
-        <h2 className="text-lg font-semibold mb-6 flex items-center gap-2 text-[var(--text-primary)]">
-          <span>🌙</span> Optional Prayers
+      <section className="glass-panel rounded-3xl p-6">
+        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-[var(--text-primary)] tracking-tight">
+          <span>🌙</span> Sunnah Prayers
         </h2>
         <div className="grid sm:grid-cols-2 gap-3">
-          <Toggle label="Tahajjud (Night Prayer)" field="tahajjud" icon="🌌" />
+          <Toggle label="Tahajjud" field="tahajjud" icon="🌌" />
           <Toggle label="Witr" field="witr" icon="✨" />
-          <Toggle label="Duha (Forenoon)" field="duha" icon="☀️" />
-          <Toggle label="Jumu'ah (Friday)" field="jummah" icon="🕌" />
+          <Toggle label="Duha" field="duha" icon="☀️" />
+          <Toggle label="Jumu'ah" field="jummah" icon="🕌" />
         </div>
       </section>
 
       {/* === QURAN === */}
-      <section id="quran" className="glass-panel rounded-2xl p-6 md:p-8">
-        <h2 className="text-lg font-semibold mb-6 flex items-center gap-2 text-[var(--text-primary)]">
-          <span>📖</span> Qurʾān Recitation
+      <section id="quran" className="glass-panel rounded-3xl p-6">
+        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-[var(--text-primary)] tracking-tight">
+          <span>📖</span> Qurʾān
         </h2>
         <div className="space-y-3">
           <CountInput label="Pages read" field="quran_pages" icon="📄" />
@@ -217,9 +209,9 @@ export default function LogClient({ existingLog, userId, today }: Props) {
       </section>
 
       {/* === ZIKR === */}
-      <section id="zikr" className="glass-panel rounded-2xl p-6 md:p-8">
-        <h2 className="text-lg font-semibold mb-6 flex items-center gap-2 text-[var(--text-primary)]">
-          <span>📿</span> Zikr & Tasbih
+      <section id="zikr" className="glass-panel rounded-3xl p-6">
+        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-[var(--text-primary)] tracking-tight">
+          <span>📿</span> Zikr
         </h2>
         <div className="grid sm:grid-cols-2 gap-3">
           <CountInput label="SubhānAllah" field="subhanallah_count" icon="✨" />
@@ -230,65 +222,56 @@ export default function LogClient({ existingLog, userId, today }: Props) {
       </section>
 
       {/* === CHARACTER === */}
-      <section className="glass-panel rounded-2xl p-6 md:p-8">
-        <h2 className="text-lg font-semibold mb-6 flex items-center gap-2 text-[var(--text-primary)]">
-          <span>🌱</span> Character & Self-Purification
+      <section className="glass-panel rounded-3xl p-6">
+        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-[var(--text-primary)] tracking-tight">
+          <span>🌱</span> Character
         </h2>
         <div className="grid sm:grid-cols-2 gap-3">
-          <Toggle label="Guarded my eyes" field="guard_eyes" icon="👁️" />
-          <Toggle label="Guarded my ears" field="guard_ears" icon="👂" />
-          <Toggle label="Controlled my anger" field="controlled_anger" icon="😤" />
-          <Toggle label="Practiced patience (Sabr)" field="patience" icon="🕊️" />
-        </div>
-      </section>
-
-      {/* === GOOD DEEDS === */}
-      <section className="glass-panel rounded-2xl p-6 md:p-8">
-        <h2 className="text-lg font-semibold mb-6 flex items-center gap-2 text-[var(--text-primary)]">
-          <span>🤲</span> Good Deeds
-        </h2>
-        <div className="grid sm:grid-cols-2 gap-3">
-          <Toggle label="Helped someone today" field="helped_someone" icon="🤝" />
-          <Toggle label="Gave charity (Sadaqah)" field="gave_charity" icon="💝" />
+          <Toggle label="Guarded eyes" field="guard_eyes" icon="👁️" />
+          <Toggle label="Guarded ears" field="guard_ears" icon="👂" />
+          <Toggle label="Controlled anger" field="controlled_anger" icon="😤" />
+          <Toggle label="Practiced Sabr" field="patience" icon="🕊️" />
+          <Toggle label="Helped someone" field="helped_someone" icon="🤝" />
+          <Toggle label="Gave charity" field="gave_charity" icon="💝" />
         </div>
       </section>
 
       {/* === REFLECTION === */}
-      <section className="glass-panel rounded-2xl p-6 md:p-8">
-        <h2 className="text-lg font-semibold mb-6 flex items-center gap-2 text-[var(--text-primary)]">
-          <span>💭</span> Reflection Notes
+      <section className="glass-panel rounded-3xl p-6">
+        <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-[var(--text-primary)] tracking-tight">
+          <span>💭</span> Thoughts
         </h2>
         <textarea
           value={form.reflection_notes}
           onChange={e => setForm(f => ({ ...f, reflection_notes: e.target.value }))}
-          placeholder="How was your day spiritually? What can you improve tomorrow? الحمد لله..."
-          rows={4}
-          className="w-full rounded-xl p-4 text-sm resize-none outline-none transition-all shadow-inner"
+          placeholder="How was your day? الحمد لله..."
+          rows={3}
+          className="w-full rounded-2xl p-5 text-[15px] resize-none outline-none transition-all focus:border-[var(--accent)]"
           style={{
             background: 'var(--surface-2)',
             border: '1px solid var(--border)',
             color: 'var(--text-primary)',
             fontFamily: 'var(--font-inter)',
           }}
-          onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
-          onBlur={e => (e.target.style.borderColor = 'var(--border)')}
         />
       </section>
 
-      {/* Save button */}
-      <div className="sticky bottom-6 z-10 pt-4">
-        <button
-          onClick={handleSave}
-          disabled={saving || saved}
-          className="w-full py-4 rounded-xl font-bold text-lg transition-all hover:-translate-y-1 active:scale-95 disabled:opacity-70 text-white shadow-xl shadow-indigo-500/20"
-          style={{
-            background: saved
-              ? 'linear-gradient(135deg, var(--green), var(--green-light))'
-              : 'linear-gradient(135deg, var(--accent), var(--accent-light))',
-          }}
-        >
-          {saved ? '✓ Saved! Redirecting...' : saving ? 'Saving...' : existingLog ? 'Update Log' : 'Save Log'}
-        </button>
+      {/* Save button (Fixed Bottom for Mobile Navigation) */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--background)]/80 backdrop-blur-3xl border-t border-[var(--border)] p-4 pb-safe pb-[76px] md:pb-4 md:sticky flex items-center justify-center">
+        <div className="max-w-2xl w-full">
+          <button
+            onClick={handleSave}
+            disabled={saving || saved}
+            className="w-full py-4 rounded-2xl font-extrabold text-[16px] transition-all active:scale-95 disabled:opacity-70 text-white shadow-[0_4px_20px_rgba(94,92,230,0.4)]"
+            style={{
+              background: saved
+                ? 'var(--green)'
+                : 'linear-gradient(135deg, var(--accent), var(--accent-light))',
+            }}
+          >
+            {saved ? '✓ Saved!' : saving ? 'Saving...' : existingLog ? 'Update My Log' : 'Save My Log'}
+          </button>
+        </div>
       </div>
     </div>
   )

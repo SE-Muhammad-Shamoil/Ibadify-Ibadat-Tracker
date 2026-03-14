@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b; /* Deep rich dark background */
-  --surface: #18181b;
-  --surface-2: #27272a;
-  --border: #3f3f46;
-  --text-primary: #fafafa;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
-  --accent: #8b5cf6; /* Switch to a richer purple/violet */
-  --accent-light: #a78bfa;
-  --accent-glow: rgba(139, 92, 246, 0.4);
-  --gold: #f59e0b;
-  --gold-light: #fbbf24;
-  --green: #10b981;
-  --green-light: #34d399;
-  --red: #ef4444;
+  --background: #000000; /* Pure black for native app feel */
+  --surface: #121212;
+  --surface-2: #1c1c1e;
+  --border: #2c2c2e;
+  --text-primary: #ffffff;
+  --text-secondary: #ebebf5;
+  --text-muted: #8e8e93;
+  --accent: #5e5ce6; /* iOS-like indigo/purple */
+  --accent-light: #bf5af2;
+  --accent-glow: rgba(94, 92, 230, 0.4);
+  --gold: #ff9f0a;
+  --gold-light: #ffd60a;
+  --green: #30d158;
+  --green-light: #34c759;
+  --red: #ff453a;
   --font-inter: "Inter", sans-serif;
 }
 
@@ -50,19 +50,24 @@ body {
 
 /* Glass morphism utility */
 .glass {
-  background: rgba(24, 24, 27, 0.6);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  background: rgba(28, 28, 30, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-panel {
-  background: linear-gradient(145deg, rgba(39, 39, 42, 0.6), rgba(24, 24, 27, 0.8));
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(28, 28, 30, 0.5);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 20px);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 20px);
 }
 
 /* Gradient text */

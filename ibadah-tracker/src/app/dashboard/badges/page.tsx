@@ -17,23 +17,23 @@ export default async function BadgesPage() {
   const earnedTypes = new Set(badges.map(b => b.badge_type))
 
   return (
-    <div className="space-y-8 animate-fadeIn max-w-5xl mx-auto">
-      <div className="mb-2">
-        <h1 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] tracking-tight">Achievements</h1>
-        <p className="text-[var(--text-muted)] mt-2 font-medium">
+    <div className="space-y-6 animate-fadeIn max-w-5xl mx-auto px-4 md:px-0 pb-[100px] pt-4">
+      <div className="mb-4">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight">Achievements</h1>
+        <p className="text-[var(--text-muted)] mt-1 font-medium">
           {badges.length} of {BADGES_CONFIG.length} badges earned
         </p>
       </div>
 
       {/* Progress bar */}
-      <div className="glass-panel rounded-2xl p-6 md:p-8">
+      <div className="glass-panel rounded-3xl p-6 md:p-8">
         <div className="flex items-center justify-between mb-4">
-          <span className="text-sm font-semibold text-[var(--text-secondary)]">Collection Progress</span>
-          <span className="text-lg font-bold text-[var(--accent-light)]">
+          <span className="text-[15px] font-bold text-[var(--text-secondary)]">Collection Progress</span>
+          <span className="text-xl font-extrabold text-[var(--accent)]">
             {Math.round(badges.length / BADGES_CONFIG.length * 100)}%
           </span>
         </div>
-        <div className="w-full h-3 rounded-full bg-[var(--surface-2)] shadow-inner overflow-hidden">
+        <div className="w-full h-4 rounded-full bg-[var(--surface-2)] shadow-inner overflow-hidden border border-[var(--border)]">
           <div
             className="h-full rounded-full transition-all duration-1000 relative"
             style={{
@@ -54,14 +54,14 @@ export default async function BadgesPage() {
           return (
             <div
               key={config.type}
-              className={`glass-panel rounded-2xl p-6 transition-all border ${
+              className={`glass-panel rounded-3xl p-6 transition-all border ${
                 earned 
-                  ? 'border-[var(--accent)] bg-indigo-500/5 hover:-translate-y-1 hover:shadow-lg hover:shadow-indigo-500/10 hover:border-[var(--accent-light)]' 
+                  ? 'border-[var(--accent)] bg-[var(--accent-glow)] hover:-translate-y-1 active:scale-95 shadow-sm hover:shadow-lg hover:shadow-indigo-500/20' 
                   : 'border-[var(--border)] opacity-60 grayscale hover:grayscale-0 hover:opacity-100'
               }`}
             >
-              <div className="flex items-start gap-4">
-                <div className={`w-14 h-14 shrink-0 rounded-2xl flex items-center justify-center text-3xl shadow-sm border ${
+              <div className="flex items-center gap-5">
+                <div className={`w-16 h-16 shrink-0 rounded-[1.25rem] flex items-center justify-center text-4xl shadow-sm border ${
                     earned 
                       ? 'bg-gradient-to-br from-[var(--surface)] to-[var(--surface-2)] border-[var(--accent)] text-white' 
                       : 'bg-[var(--surface)] border-[var(--border)] text-[var(--text-muted)]'
@@ -69,25 +69,25 @@ export default async function BadgesPage() {
                   {earned ? config.icon : '🔒'}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className={`font-semibold truncate ${earned ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}>
+                  <div className={`text-[16px] font-bold truncate ${earned ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}>
                     {config.name}
                   </div>
-                  <div className={`text-xs mt-1 leading-snug ${earned ? 'text-[var(--text-secondary)]' : 'text-[var(--text-muted)]'}`}>
+                  <div className={`text-[13px] font-medium mt-1 leading-snug ${earned ? 'text-[var(--text-secondary)]' : 'text-[var(--text-muted)]'}`}>
                     {config.description}
                   </div>
                   {earned && badge && (
-                    <div className="text-[10px] font-bold uppercase tracking-wider mt-3 text-[var(--accent-light)] bg-[var(--accent-glow)] inline-block px-2 py-0.5 rounded-md">
+                    <div className="text-[10px] font-extrabold uppercase tracking-wider mt-3 text-[var(--accent-light)] bg-black/20 inline-block px-2.5 py-1 rounded-md">
                       Earned {new Date(badge.earned_at).toLocaleDateString()}
                     </div>
                   )}
                   {!earned && (
-                    <div className="text-[10px] font-bold uppercase tracking-wider mt-3 text-[var(--text-muted)] border border-[var(--border)] inline-block px-2 py-0.5 rounded-md">
+                    <div className="text-[10px] font-extrabold uppercase tracking-wider mt-3 text-[var(--text-muted)] border border-[var(--border)] inline-block px-2.5 py-1 rounded-md">
                       Locked
                     </div>
                   )}
                 </div>
                 {earned && (
-                  <div className="w-6 h-6 shrink-0 rounded-full flex items-center justify-center bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold">
+                  <div className="w-8 h-8 shrink-0 rounded-full flex items-center justify-center bg-[var(--green)] text-white shadow-md text-sm font-bold">
                     ✓
                   </div>
                 )}
