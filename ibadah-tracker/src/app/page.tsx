@@ -8,13 +8,16 @@ export default function LandingPage() {
   const router = useRouter()
   const supabase = createClient()
 
+  // OAuth login commented out for UI preview
   const handleGoogleLogin = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    })
+    // await supabase.auth.signInWithOAuth({
+    //   provider: 'google',
+    //   options: {
+    //     redirectTo: `${window.location.origin}/auth/callback`,
+    //   },
+    // })
+    // Guest mode: navigate directly to dashboard
+    router.push('/dashboard')
   }
 
   return (
