@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { format, parseISO } from 'date-fns'
 import type { IbadahLog, Streak, Badge, PrayerName } from '@/lib/types'
 import { PRAYER_NAMES, PRAYER_LABELS, BADGES_CONFIG } from '@/lib/types'
+import { Check, Circle, Flame, Moon, BookOpen, Target, TrendingUp, Plus, Calendar, Activity } from 'lucide-react'
 
 interface Props {
   todayLog: IbadahLog | null
@@ -15,9 +16,9 @@ interface Props {
 }
 
 const prayerStatus = (val: 0 | 1 | 2) => {
-  if (val === 2) return { label: 'Jamāʿah', cls: 'prayer-done', emoji: '✅' }
-  if (val === 1) return { label: 'Done', cls: 'prayer-done', emoji: '✓' }
-  return { label: 'Missed', cls: 'prayer-empty', emoji: '○' }
+  if (val === 2) return { label: 'Jamāʿah', cls: 'prayer-jamaa', icon: Check }
+  if (val === 1) return { label: 'Done', cls: 'prayer-done', icon: Check }
+  return { label: 'Missed', cls: 'prayer-empty', icon: Circle }
 }
 
 export default function DashboardClient({ todayLog, recentLogs, streaks, badges, today }: Props) {
@@ -51,8 +52,8 @@ export default function DashboardClient({ todayLog, recentLogs, streaks, badges,
           <h1 className="text-3xl md:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight leading-tight">
             Assalamu Alaikum
           </h1>
-          <p className="text-[var(--text-muted)] mt-1 font-medium flex items-center gap-2">
-            <span>📅</span> {format(new Date(), 'EEEE, MMMM d')}
+          <p className="text-[var(--text-muted)] mt-1.5 font-medium flex items-center gap-2">
+            <Calendar className="w-4 h-4 text-[var(--accent)]" /> {format(new Date(), 'EEEE, MMMM d')}
           </p>
         </div>
       </div>
@@ -72,16 +73,17 @@ export default function DashboardClient({ todayLog, recentLogs, streaks, badges,
           {PRAYER_NAMES.map((prayer) => {
             const val = todayLog ? todayLog[prayer] : 0
             const status = prayerStatus(val as 0|1|2)
+            const Icon = status.icon
             return (
-              <div key={prayer} className="snap-start shrink-0 w-[140px] md:w-auto flex flex-col items-center gap-3 p-5 rounded-3xl bg-[var(--surface-2)] border border-[var(--border)] transition-all flex-none">
-                <div className={`w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg border-[3px] ${val > 0 ? (val === 2 ? 'prayer-jamaa border-[var(--accent-light)] text-white' : 'prayer-done border-[var(--green-light)] text-white') : 'bg-[var(--surface)] border-[var(--border)] text-[var(--text-muted)]'}`}>
-                  {val > 0 ? '✓' : '○'}
+              <div key={prayer} className="snap-start shrink-0 w-[140px] md:w-auto flex flex-col items-center gap-4 p-6 rounded-3xl bg-[var(--surface-2)] border border-[var(--border)] transition-all flex-none">
+                <div className={`w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-sm border-[2px] transition-colors ${val > 0 ? (val === 2 ? 'bg-blue-500/10 border-blue-500 text-blue-500' : 'bg-emerald-500/10 border-emerald-500 text-emerald-500') : 'bg-[var(--surface)] border-[var(--border)] text-[var(--border)]'}`}>
+                  <Icon className="w-6 h-6" strokeWidth={3} />
                 </div>
                 <div className="flex flex-col items-center">
                   <span className={`text-[15px] font-bold tracking-tight ${val > 0 ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}>
                     {PRAYER_LABELS[prayer]}
                   </span>
-                  {val === 2 && <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--accent-light)] mt-1 bg-[var(--accent-glow)] px-2 py-0.5 rounded-md">Jamāʿah</span>}
+                  {val === 2 && <span className="text-[10px] font-bold uppercase tracking-wider text-blue-400 mt-1.5 bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded-md">Jamāʿah</span>}
                 </div>
               </div>
             )
@@ -98,48 +100,47 @@ export default function DashboardClient({ todayLog, recentLogs, streaks, badges,
               label: 'Prayer Streak',
               value: prayerStreak?.current_streak ?? 0,
               suffix: 'days',
-              icon: '🔥',
+              icon: Flame,
               color: 'var(--gold)',
-              bgClass: 'bg-[var(--surface-2)] border-[var(--border)]',
             },
             {
               label: 'Prayers Today',
               value: `${totalPrayersToday}/5`,
               suffix: '',
-              icon: '🕌',
+              icon: Moon,
               color: 'var(--accent-light)',
-              bgClass: 'bg-[var(--surface-2)] border-[var(--border)]',
             },
             {
               label: 'Quran Today',
               value: todayLog?.quran_pages ?? 0,
               suffix: 'pages',
-              icon: '📖',
-              color: 'var(--green-light)',
-              bgClass: 'bg-[var(--surface-2)] border-[var(--border)]',
+              icon: BookOpen,
+              color: '#3b82f6', // blue
             },
             {
               label: 'Zikr Today',
               value: totalZikrToday,
               suffix: 'times',
-              icon: '📿',
-              color: '#bf5af2', // matching iOS purple
-              bgClass: 'bg-[var(--surface-2)] border-[var(--border)]',
+              icon: Target,
+              color: '#a855f7', // purple
             },
-          ].map((stat) => (
-            <div key={stat.label} className={`rounded-3xl p-5 border ${stat.bgClass}`}>
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-2xl">{stat.icon}</span>
-                <div className="w-2 h-2 rounded-full shadow-lg" style={{ background: stat.color, boxShadow: `0 0 10px ${stat.color}` }} />
+          ].map((stat) => {
+            const Icon = stat.icon
+            return (
+              <div key={stat.label} className="rounded-3xl p-5 border bg-[var(--surface-2)] border-[var(--border)] shadow-sm">
+                <div className="flex items-center justify-between mb-4">
+                  <Icon className="w-6 h-6" style={{ color: stat.color }} />
+                  <div className="w-2 h-2 rounded-full shadow-sm" style={{ background: stat.color }} />
+                </div>
+                <div className="text-3xl font-extrabold mb-1 tracking-tight text-[var(--text-primary)]">
+                  {stat.value}
+                </div>
+                <div className="text-[13px] font-semibold text-[var(--text-secondary)]">
+                  {stat.label} <span className="text-[var(--text-muted)] font-medium ml-0.5">{stat.suffix}</span>
+                </div>
               </div>
-              <div className="text-3xl font-extrabold mb-1 tracking-tight" style={{ color: "var(--text-primary)" }}>
-                {stat.value}
-              </div>
-              <div className="text-[13px] font-semibold text-[var(--text-secondary)]">
-                {stat.label} <span className="text-[var(--text-muted)] font-medium ml-0.5">{stat.suffix}</span>
-              </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
       {/* Bottom row */}
@@ -181,22 +182,25 @@ export default function DashboardClient({ todayLog, recentLogs, streaks, badges,
           <h2 className="text-xl font-bold mb-6 text-[var(--text-primary)] tracking-tight">Quick Actions</h2>
           <div className="grid grid-cols-2 gap-3">
             {[
-              { href: '/dashboard/log', label: 'Log Prayers', icon: '🕌', color: 'var(--accent)' },
-              { href: '/dashboard/log#quran', label: 'Log Quran', icon: '📖', color: 'var(--green)' },
-              { href: '/dashboard/log#zikr', label: 'Log Zikr', icon: '📿', color: '#bf5af2' },
-              { href: '/dashboard/progress', label: 'Progress', icon: '📈', color: 'var(--gold)' },
-            ].map((action) => (
-              <Link
-                key={action.href}
-                href={action.href}
-                className="flex items-center gap-3 p-4 rounded-2xl transition-all active:scale-95 bg-[var(--surface-2)] shadow-sm"
-              >
-                <div className="w-10 h-10 rounded-full flex items-center justify-center text-xl" style={{ background: `${action.color}20`, color: action.color }}>
-                  {action.icon}
-                </div>
-                <span className="text-[14px] font-bold text-[var(--text-primary)]">{action.label}</span>
-              </Link>
-            ))}
+              { href: '/dashboard/log', label: 'Log Prayers', icon: Moon, color: 'var(--accent)' },
+              { href: '/dashboard/log#quran', label: 'Log Quran', icon: BookOpen, color: '#3b82f6' },
+              { href: '/dashboard/log#zikr', label: 'Log Zikr', icon: Target, color: '#a855f7' },
+              { href: '/dashboard/progress', label: 'Progress', icon: TrendingUp, color: 'var(--gold)' },
+            ].map((action) => {
+              const Icon = action.icon
+              return (
+                <Link
+                  key={action.href}
+                  href={action.href}
+                  className="flex items-center gap-3 p-4 rounded-2xl transition-all active:scale-95 bg-[var(--surface-2)] shadow-sm hover:bg-[var(--border)] border border-transparent hover:border-white/5"
+                >
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center border border-white/5" style={{ background: `${action.color}15`, color: action.color }}>
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <span className="text-[14px] font-bold text-[var(--text-primary)]">{action.label}</span>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </div>
@@ -204,9 +208,9 @@ export default function DashboardClient({ todayLog, recentLogs, streaks, badges,
       {/* Floating Action Button for Mobile */}
       <Link
         href="/dashboard/log"
-        className="md:hidden fixed bottom-[90px] right-5 z-40 w-14 h-14 bg-[var(--accent)] text-white rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(94,92,230,0.6)] active:scale-90 transition-transform"
+        className="md:hidden fixed bottom-[90px] right-5 z-40 w-14 h-14 bg-[var(--accent)] text-white rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform"
       >
-        <span className="text-2xl font-light">+</span>
+        <Plus className="w-6 h-6" strokeWidth={3} />
       </Link>
     </div>
   )

@@ -1,21 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000; /* Pure black for native app feel */
-  --surface: #121212;
-  --surface-2: #1c1c1e;
-  --border: #2c2c2e;
-  --text-primary: #ffffff;
-  --text-secondary: #ebebf5;
-  --text-muted: #8e8e93;
-  --accent: #5e5ce6; /* iOS-like indigo/purple */
-  --accent-light: #bf5af2;
-  --accent-glow: rgba(94, 92, 230, 0.4);
-  --gold: #ff9f0a;
-  --gold-light: #ffd60a;
-  --green: #30d158;
-  --green-light: #34c759;
-  --red: #ff453a;
+  --background: #09090b; /* Zinc 950 */
+  --surface: #18181b; /* Zinc 900 */
+  --surface-2: #27272a; /* Zinc 800 */
+  --border: #3f3f46; /* Zinc 700 */
+  --text-primary: #fafafa; /* Zinc 50 */
+  --text-secondary: #a1a1aa; /* Zinc 400 */
+  --text-muted: #71717a; /* Zinc 500 */
+  
+  --accent: #10b981; /* Emerald 500 - more calming, spiritual color */
+  --accent-light: #34d399; /* Emerald 400 */
+  --accent-glow: rgba(16, 185, 129, 0.15);
+  
+  --gold: #f59e0b; /* Amber 500 */
+  --gold-light: #fbbf24;
+  --green: #10b981;
+  --green-light: #34d399;
+  --red: #ef4444; /* Red 500 */
+  
   --font-inter: "Inter", sans-serif;
 }
 
@@ -48,19 +51,19 @@ body {
   border-radius: 3px;
 }
 
-/* Glass morphism utility */
+/* Glass morphism utility - more subtle */
 .glass {
-  background: rgba(28, 28, 30, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(24, 24, 27, 0.4); /* Zinc 900 */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .glass-panel {
-  background: rgba(28, 28, 30, 0.5);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(24, 24, 27, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .pb-safe {
@@ -72,7 +75,7 @@ body {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #818cf8, #6366f1, #a78bfa);
+  background: linear-gradient(135deg, #a7f3d0, #10b981, #059669);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -143,8 +146,8 @@ body {
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 .prayer-jamaa {
-  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+  background: linear-gradient(135deg, #3b82f6, #2563eb); /* Blue for Jamaa */
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 .prayer-missed {
   background: rgba(239, 68, 68, 0.1);
