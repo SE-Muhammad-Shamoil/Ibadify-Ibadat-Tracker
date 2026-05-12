@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Lora, DM_Sans } from "next/font/google";
+import { AuthProvider } from "@/lib/context/AuthContext";
 import "./globals.css";
 
 const lora = Lora({
@@ -27,7 +28,9 @@ export default function RootLayout({
       lang="en"
       className={`${lora.variable} ${dmSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-cream text-charcoal">{children}</body>
+      <body className="min-h-full flex flex-col bg-cream text-charcoal">
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }

@@ -142,6 +142,53 @@ export async function upsertUserProfile(userId: string, data: DocumentData): Pro
   );
 }
 
+/**
+ * Initialize a new user if they don't exist
+ */
+export async function initializeUser(user: { uid: string; email: string | null; displayName: string | null; photoURL: string | null }): Promise<void> {
+  const existingUser = await getUserProfile(user.uid);
+  if (!existingUser) {
+    const homeTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const today = new Date().toLocaleDateString('en-CA', { timeZone: homeTimezone }); // YYYY-MM-DD
+    
+    await firestoreSetDoc(doc(db, 'users', user.uid), {
+      uid: user.uid,
+      email: user.email || '',
+      displayName: user.displayName || 'Spiritual Seeker',
+      photoURL: user.photoURL || '',
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+      homeTimezone,
+      madhab: 'hanafi',
+      prayerCalcMethod: 'MWL',
+      barakahScore: 0,
+      streakGraceEnabled: true,
+      quietHoursEnabled: true,
+      onboardingComplete: false,
+      lastActiveDate: today,
+    });
+    
+    // Also initialize streaks
+    await updateStreak(user.uid, {
+      currentStreak: 0,
+      longestStreak: 0,
+      lastLogDate: '',
+      streakType: 'fard_only',
+      graceUsedToday: false,
+      streakHistory: {}
+    });
+    
+    // Also initialize qazaDebt
+    await updateQazaDebt(user.uid, {
+      estimatedDebt: { fajr: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0, witr: 0 },
+      paidOff: { fajr: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0, witr: 0 },
+      dailyPayoffTarget: 0,
+      payoffStartDate: today,
+      estimatedCompletionDate: ''
+    });
+  }
+}
+
 // ─── Streak Helpers ──────────────────────────────────────────────────────────
 
 /**
