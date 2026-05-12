@@ -166,14 +166,14 @@
 
 ## ✅ PHASE 6 — PWA, Notifications & Offline
 
-- [ ] **P6-01** · Install `@ducanh2912/next-pwa`: `npm install @ducanh2912/next-pwa`
-- [ ] **P6-02** · Configure `next.config.ts` with PWA wrapper as specified in §7.1
-- [ ] **P6-03** · Create `public/manifest.json` with content from §7.1
-- [ ] **P6-04** · Generate all PWA icons (72px to 512px). Use a script or tool. Place in `public/icons/`.
-- [ ] **P6-05** · Add FCM service worker integration in `public/firebase-messaging-sw.js` (importScripts Firebase compat CDN, handle push events)
-- [ ] **P6-06** · Register `firebase-messaging-sw.js` in `/lib/firebase/messaging.ts`
-- [ ] **P6-07** · Create `/components/pwa/InstallPrompt.tsx` — listens for `beforeinstallprompt` event. Shows an unobtrusive install banner (bottom of screen, dismissible) after 3 days of usage.
-- [ ] **P6-08** · Create `/app/api/push/route.ts` (Edge Function):
+- [x] **P6-01** · Install `@ducanh2912/next-pwa`: `npm install @ducanh2912/next-pwa`
+- [x] **P6-02** · Configure `next.config.ts` with PWA wrapper as specified in §7.1
+- [x] **P6-03** · Create `public/manifest.json` with content from §7.1
+- [x] **P6-04** · Generate all PWA icons (72px to 512px). Use a script or tool. Place in `public/icons/`.
+- [x] **P6-05** · Add FCM service worker integration in `public/firebase-messaging-sw.js` (importScripts Firebase compat CDN, handle push events)
+- [x] **P6-06** · Register `firebase-messaging-sw.js` in `/lib/firebase/messaging.ts`
+- [x] **P6-07** · Create `/components/pwa/InstallPrompt.tsx` — listens for `beforeinstallprompt` event. Shows an unobtrusive install banner (bottom of screen, dismissible) after 3 days of usage.
+- [x] **P6-08** · Create `/app/api/push/route.ts` (Edge Function):
   - Validates auth token in request header
   - Uses Firebase Admin SDK to send FCM notification to user's token
   - Payload: `{ title, body, data: { url } }`

@@ -9,6 +9,7 @@ import { getDailyLog, getUserProfile } from '@/lib/firebase/firestore';
 import { getTodayStringInTimezone } from '@/lib/utils/timezone';
 import { calculateBarakahScore, getBarakahTint } from '@/lib/utils/barakah';
 import { useAuth } from '@/lib/context/AuthContext';
+import { InstallPrompt } from '../pwa/InstallPrompt';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { isMobile, mounted } = useAdaptive();
@@ -48,9 +49,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     );
   }
 
-  if (isMobile) {
-    return <MobileShell>{children}</MobileShell>;
-  }
-
-  return <DesktopShell>{children}</DesktopShell>;
+  return (
+    <>
+      {isMobile ? (
+        <MobileShell>{children}</MobileShell>
+      ) : (
+        <DesktopShell>{children}</DesktopShell>
+      )}
+      <InstallPrompt />
+    </>
+  );
 }
