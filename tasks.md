@@ -80,21 +80,21 @@
 
 ## ✅ PHASE 4 — Adaptive Layout System
 
-- [ ] **P4-01** · Create `/lib/hooks/useAdaptive.ts` — returns `{ isMobile: boolean }` using `useMediaQuery` at 768px breakpoint (SSR-safe: default to `false` until mount)
-- [ ] **P4-02** · Create `/components/adaptive/AppShell.tsx` — conditionally renders `MobileShell` or `DesktopShell` based on `isMobile`
-- [ ] **P4-03** · Create `/components/adaptive/MobileShell.tsx`:
+- [x] **P4-01** · Create `/lib/hooks/useAdaptive.ts` — returns `{ isMobile: boolean }` using `useMediaQuery` at 768px breakpoint (SSR-safe: default to `false` until mount)
+- [x] **P4-02** · Create `/components/adaptive/AppShell.tsx` — conditionally renders `MobileShell` or `DesktopShell` based on `isMobile`
+- [x] **P4-03** · Create `/components/adaptive/MobileShell.tsx`:
   - `children` render area (full height minus bottom nav)
   - `BottomNav` with 5 icons: Home, Tracker, Review, Qaza, Profile
   - `BottomNav` uses Phosphor icons, active state with teal-dust color
-- [ ] **P4-04** · Create `/components/adaptive/DesktopShell.tsx`:
+- [x] **P4-04** · Create `/components/adaptive/DesktopShell.tsx`:
   - Left sidebar 240px (collapsible to 64px icon mode)
   - Sidebar contains: logo, nav items, user avatar at bottom
   - Main content area with max-w-7xl centering
-- [ ] **P4-05** · Implement sidebar collapse toggle with smooth CSS transition (width 240→64px, 250ms ease)
-- [ ] **P4-06** · Create placeholder pages for all routes in §1.2: dashboard, tracker, review, qaza, history, insights, settings
-- [ ] **P4-07** · Verify adaptive layout renders correctly at 375px (mobile) and 1440px (desktop) using browser DevTools
-- [ ] **P4-08** · Implement page transition animation (opacity + translateY) via a `PageTransition` wrapper component
-- [ ] **⬛ CHECKPOINT P4** · Adaptive shell renders correctly, navigation works. Commit: `feat: adaptive layout system mobile and desktop`
+- [x] **P4-05** · Implement sidebar collapse toggle with smooth CSS transition (width 240→64px, 250ms ease)
+- [x] **P4-06** · Create placeholder pages for all routes in §1.2: dashboard, tracker, review, qaza, history, insights, settings
+- [x] **P4-07** · Verify adaptive layout renders correctly at 375px (mobile) and 1440px (desktop) using browser DevTools
+- [x] **P4-08** · Implement page transition animation (opacity + translateY) via a `PageTransition` wrapper component
+- [x] **⬛ CHECKPOINT P4** · Adaptive shell renders correctly, navigation works. Commit: `feat: adaptive layout system mobile and desktop`
 
 ---
 

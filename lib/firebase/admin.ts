@@ -31,7 +31,7 @@ function getAdminApp(): App {
 }
 
 const adminApp = getAdminApp();
-const adminDb = getFirestore(adminApp);
+const adminDb = getFirestore(adminApp, 'default');
 const adminAuth = getAuth(adminApp);
 const adminMessaging = getMessaging(adminApp);
 

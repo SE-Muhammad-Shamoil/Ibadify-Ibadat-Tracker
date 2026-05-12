@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { House, ListChecks, MoonStars, ClockCounterClockwise, User, CaretLeft, CaretRight, ChartLineUp } from '@phosphor-icons/react';
+import { House, ListChecks, MoonStars, ClockCounterClockwise, User, CaretLeft, CaretRight, ChartLineUp, Calendar } from '@phosphor-icons/react';
 import { PageTransition } from './PageTransition';
 import { useAuth } from '@/lib/context/AuthContext';
 
@@ -17,6 +17,7 @@ export function DesktopShell({ children }: { children: React.ReactNode }) {
     { name: 'Tracker', path: '/tracker', icon: ListChecks },
     { name: 'Nightly Review', path: '/review', icon: MoonStars },
     { name: 'Qaza Debt', path: '/qaza', icon: ClockCounterClockwise },
+    { name: 'History', path: '/history', icon: Calendar },
     { name: 'Insights', path: '/insights', icon: ChartLineUp },
   ];
 

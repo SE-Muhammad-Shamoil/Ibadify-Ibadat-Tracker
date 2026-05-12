@@ -18,7 +18,7 @@ import {
 import { app } from './config';
 
 // Initialize Firestore
-const db = getFirestore(app);
+const db = getFirestore(app, 'default');
 
 // ─── Typed Helpers ───────────────────────────────────────────────────────────
 
