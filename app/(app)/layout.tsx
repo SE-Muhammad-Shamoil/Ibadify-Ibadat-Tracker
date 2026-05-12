@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/context/AuthContext';
+import { AppShell } from '@/components/adaptive/AppShell';
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -26,18 +27,15 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
     return null; // Will redirect in useEffect
   }
 
-  // Placeholder AppShell until Phase 4
-  return (
-    <div className="min-h-screen bg-cream">
-      {children}
-    </div>
-  );
+  return <>{children}</>;
 }
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <AuthGuard>
-      {children}
+      <AppShell>
+        {children}
+      </AppShell>
     </AuthGuard>
   );
 }
