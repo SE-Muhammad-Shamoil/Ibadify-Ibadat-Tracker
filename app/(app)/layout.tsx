@@ -10,8 +10,12 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && !user) {
-      router.replace('/login');
+    if (!loading) {
+      if (!user) {
+        router.replace('/login');
+      } else if (user && !user.onboardingComplete && !window.location.pathname.includes('/onboarding')) {
+        router.replace('/onboarding');
+      }
     }
   }, [user, loading, router]);
 
