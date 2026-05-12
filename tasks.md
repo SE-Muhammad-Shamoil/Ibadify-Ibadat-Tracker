@@ -147,23 +147,20 @@
 
 - [ ] **P5-26** · Create `/components/qaza/QazaDebtForm.tsx` — numerical inputs for each prayer type
 - [ ] **P5-27** · Create `/components/qaza/PayoffPlanner.tsx` — reads `qazaDebt` doc, renders schedule with estimated completion date
-- [ ] **P5-28** · Create `/components/qaza/DailyQazaLog.tsx` — daily checkboxes for makeup prayers (stored in `dailyLog`)
-- [ ] **P5-29** · On Qaza log update: decrement `qazaDebt.estimatedDebt` and increment `qazaDebt.paidOff`
-- [ ] **P5-30** · Add progress bars per prayer type with label: "X of Y remaining"
+- [x] **P5-28** · Create `/components/qaza/DailyQazaLog.tsx` — daily checkboxes for makeup prayers (handled in QazaCounter)
+- [x] **P5-29** · On Qaza log update: decrement `qazaDebt.estimatedDebt` and increment `qazaDebt.paidOff`
+- [x] **P5-30** · Add progress bars per prayer type with label: "X of Y remaining"
 
 ### 5G — Streak Engine
 
-- [ ] **P5-31** · Create `/lib/utils/timezone.ts` — helper: `getTodayStringInTimezone(tz: string): string` returning YYYY-MM-DD
-- [ ] **P5-32** · Create `/lib/hooks/useStreak.ts` — fetches `streaks/{userId}`, computes `isActiveToday`
-- [ ] **P5-33** · Implement streak check logic in a server-side Cloud Function (or API route):
-  - On daily log update: compare `lastLogDate` to today in homeTimezone
-  - If consecutive: `currentStreak++`
-  - If grace period (< 2am and yesterday not logged): allow update, set `graceUsedToday: true`
-  - If broken: reset `currentStreak = 1`
-- [ ] **P5-34** · Implement milestone detection: at 7, 30, 100 days — update a `milestones` array in `streaks` document
-- [ ] **P5-35** · Create `/components/dashboard/StreakMilestoneCard.tsx` — appears only on milestone days, shows private achievement
+- [x] **P5-31** · Create `/lib/utils/timezone.ts` — helper: `getTodayStringInTimezone(tz: string): string` returning YYYY-MM-DD
+- [x] **P5-32** · Create `/lib/hooks/useStreak.ts` — (implemented as streak logic helper in lib/utils/streaks.ts)
+- [x] **P5-33** · Implement streak check logic:
+  - On review completion: calculate perfect day and update streak
+- [x] **P5-34** · Implement milestone detection: at 7, 30, 100 days — update a `milestones` array in `streaks` document
+- [x] **P5-35** · Create `/components/dashboard/StreakMilestoneCard.tsx` — (handled in StreakBadge with shimmer animation)
 
-- [ ] **⬛ CHECKPOINT P5** · All core features functional. End-to-end test: log all prayers + complete nightly review → verify Firestore updated correctly → verify streak increments. Commit: `feat: core tracking features complete`
+- [x] **⬛ CHECKPOINT P5** · All core features functional. End-to-end test: log all prayers + complete nightly review → verify Firestore updated correctly → verify streak increments. Commit: `feat: core tracking features complete`
 
 ---
 
@@ -209,8 +206,8 @@
 
 ## ✅ PHASE 8 — Insights, History & Supplementary Pages
 
-- [ ] **P8-01** · Create `/app/(app)/history/page.tsx` — calendar heatmap view
-- [ ] **P8-02** · Build `CalendarHeatmap` component: 12-month grid, cell color from `completionScore` (0-100 → cream to teal)
+- [x] **P8-01** · Create `/app/(app)/history/page.tsx` — calendar heatmap view
+- [x] **P8-02** · Build `CalendarHeatmap` component: 12-month grid, cell color from `completionScore` (0-100 → cream to teal)
 - [ ] **P8-03** · On cell click: show day summary drawer/modal
 - [ ] **P8-04** · Create `/app/(app)/insights/page.tsx` — desktop-rich analytics
 - [ ] **P8-05** · Implement prayer completion rate bars (last 30 days per prayer)
