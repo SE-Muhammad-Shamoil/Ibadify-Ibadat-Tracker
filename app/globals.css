@@ -1,26 +1,40 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-cream: #FAF8F5;
+  --color-teal-dust: #4A7C6F;
+  --color-charcoal: #2D2D2D;
+  --color-border-warm: #E8E3DC;
+  
+  --font-display: var(--font-lora), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-body: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  
+  --spacing-unit: 4px;
+  --spacing-stack-sm: 8px;
+  --spacing-gutter-grid: 16px;
+  --spacing-stack-md: 24px;
+  --spacing-margin-page: 32px;
+  --spacing-stack-lg: 48px;
+  --spacing-section-gap: 64px;
+
+  --color-background: var(--color-cream);
+  --color-foreground: var(--color-charcoal);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #FAF8F5;
+    --foreground: #2D2D2D;
   }
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+}
+
+/* Base heading styles to use the display font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
 }

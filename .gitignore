@@ -40,3 +40,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+#firebase
+ibadify-e0083-firebase-adminsdk-fbsvc-b508d28416.json
+Firebase-credentials.js
+test-firebase.ts
+tasks.md
+firebase.json

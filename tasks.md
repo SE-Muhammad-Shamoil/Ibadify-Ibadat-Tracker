@@ -44,20 +44,20 @@
 
 ## ✅ PHASE 2 — Stitch MCP Design Extraction
 
-- [ ] **P2-01** · Read `/.agents/rules/UI.md` § "MANDATORY FIRST STEP: Stitch MCP Design Extraction"
-- [ ] **P2-02** · Invoke Stitch MCP with the exact prompt specified in UI.md
-- [ ] **P2-03** · Extract color palette tokens from Stitch output → document in `DESIGN.md` under `## Colors`
-- [ ] **P2-04** · Extract typography specifications → document in `DESIGN.md` under `## Typography`
-- [ ] **P2-05** · Extract spacing scale → document in `DESIGN.md` under `## Spacing`
-- [ ] **P2-06** · Extract component patterns (Card, Button, Checkbox, Progress) → document in `DESIGN.md` under `## Components`
-- [ ] **P2-07** · Document any SVG icons or assets generated → `DESIGN.md` under `## Assets`
-- [ ] **P2-08** · Update `tailwind.config.ts` with custom tokens from DESIGN.md:
+- [x] **P2-01** · Read `/.agents/rules/UI.md` § "MANDATORY FIRST STEP: Stitch MCP Design Extraction"
+- [x] **P2-02** · Invoke Stitch MCP with the exact prompt specified in UI.md
+- [x] **P2-03** · Extract color palette tokens from Stitch output → document in `DESIGN.md` under `## Colors`
+- [x] **P2-04** · Extract typography specifications → document in `DESIGN.md` under `## Typography`
+- [x] **P2-05** · Extract spacing scale → document in `DESIGN.md` under `## Spacing`
+- [x] **P2-06** · Extract component patterns (Card, Button, Checkbox, Progress) → document in `DESIGN.md` under `## Components`
+- [x] **P2-07** · Document any SVG icons or assets generated → `DESIGN.md` under `## Assets`
+- [x] **P2-08** · Update `tailwind.config.ts` with custom tokens from DESIGN.md:
   - Custom color entries (cream, teal-dust, charcoal, warm-border)
   - Custom font families (display: Lora, body: DM Sans)
-- [ ] **P2-09** · Add Google Fonts import to `/app/layout.tsx` for Lora and DM Sans (use `next/font/google`)
-- [ ] **P2-10** · Create `/app/globals.css` with CSS custom properties matching DESIGN.md tokens
-- [ ] **P2-11** · Create a simple `/app/design-preview/page.tsx` (dev-only) rendering all design tokens as a reference page — verify visually in browser
-- [ ] **⬛ CHECKPOINT P2** · DESIGN.md complete, Tailwind configured, fonts loading. Commit: `docs: design system from stitch mcp + tailwind tokens`
+- [x] **P2-09** · Add Google Fonts import to `/app/layout.tsx` for Lora and DM Sans (use `next/font/google`)
+- [x] **P2-10** · Create `/app/globals.css` with CSS custom properties matching DESIGN.md tokens
+- [x] **P2-11** · Create a simple `/app/design-preview/page.tsx` (dev-only) rendering all design tokens as a reference page — verify visually in browser
+- [x] **⬛ CHECKPOINT P2** · DESIGN.md complete, Tailwind configured, fonts loading. Commit: `docs: design system from stitch mcp + tailwind tokens`
 
 ---
 
