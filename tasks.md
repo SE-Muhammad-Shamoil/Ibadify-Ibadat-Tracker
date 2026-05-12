@@ -63,18 +63,18 @@
 
 ## ✅ PHASE 3 — Authentication & User Model
 
-- [ ] **P3-01** · Create `/app/(auth)/login/page.tsx` — minimal login page (Google + Email). Must match DESIGN.md aesthetic.
-- [ ] **P3-02** · Create `/app/(auth)/signup/page.tsx` — email signup form
-- [ ] **P3-03** · Create `AuthProvider` context in `/lib/context/AuthContext.tsx` wrapping `onAuthStateChanged`
-- [ ] **P3-04** · Create route guard middleware in `/middleware.ts` — redirect unauthenticated users from `/dashboard*` routes to `/login`
-- [ ] **P3-05** · Implement new user initialization: on first login/signup, create `users/{uid}` document with all default values from §3.2 schema
-- [ ] **P3-06** · Add `homeTimezone` auto-detection on signup: `Intl.DateTimeFormat().resolvedOptions().timeZone`
-- [ ] **P3-07** · Create `/app/(app)/layout.tsx` — auth-protected layout with `AuthProvider`. Renders `AppShell`.
-- [ ] **P3-08** · Create `/lib/hooks/useAuthState.ts` — returns `{ user, loading, error }`
-- [ ] **P3-09** · Test: sign up with email → verify user document created in Firestore → verify redirect to `/dashboard`
-- [ ] **P3-10** · Test: sign in with Google → same verification
-- [ ] **P3-11** · Test: unauthenticated access to `/dashboard` → verify redirect to `/login`
-- [ ] **⬛ CHECKPOINT P3** · Auth fully functional, user docs created on signup. Commit: `feat: firebase auth and user initialization`
+- [x] **P3-01** · Create `/app/(auth)/login/page.tsx` — minimal login page (Google + Email). Must match DESIGN.md aesthetic.
+- [x] **P3-02** · Create `/app/(auth)/signup/page.tsx` — email signup form
+- [x] **P3-03** · Create `AuthProvider` context in `/lib/context/AuthContext.tsx` wrapping `onAuthStateChanged`
+- [x] **P3-04** · Create route guard middleware in `/middleware.ts` — redirect unauthenticated users from `/dashboard*` routes to `/login`
+- [x] **P3-05** · Implement new user initialization: on first login/signup, create `users/{uid}` document with all default values from §3.2 schema
+- [x] **P3-06** · Add `homeTimezone` auto-detection on signup: `Intl.DateTimeFormat().resolvedOptions().timeZone`
+- [x] **P3-07** · Create `/app/(app)/layout.tsx` — auth-protected layout with `AuthProvider`. Renders `AppShell`.
+- [x] **P3-08** · Create `/lib/hooks/useAuthState.ts` — returns `{ user, loading, error }`
+- [x] **P3-09** · Test: sign up with email → verify user document created in Firestore → verify redirect to `/dashboard`
+- [x] **P3-10** · Test: sign in with Google → same verification
+- [x] **P3-11** · Test: unauthenticated access to `/dashboard` → verify redirect to `/login`
+- [x] **⬛ CHECKPOINT P3** · Auth fully functional, user docs created on signup. Commit: `feat: firebase auth and user initialization`
 
 ---
 
