@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users can only read/write their own document
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Daily logs — user-scoped subcollection
+    match /dailyLogs/{userId}/logs/{logId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Qaza debt — private
+    match /qazaDebt/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Streaks — private
+    match /streaks/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Custom habits
+    match /habits/{userId}/customHabits/{habitId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Notifications config
+    match /notifications/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Deny all else
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
